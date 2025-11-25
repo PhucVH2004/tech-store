@@ -22,12 +22,16 @@ class OrderController extends Controller
 
     public function update(Request $request, Order $order)
     {
-        $request->validate([
-            'status' => 'required|in:pending,confirmed,shipping,delivered,cancelled',
-        ]);
+        try {
+            $request->validate([
+                'status' => 'required|in:pending,confirmed,shipping,delivered,cancelled',
+            ]);
 
-        $order->update(['status' => $request->status]);
+            $order->update(['status' => $request->status]);
 
-        return redirect()->route('admin.orders.show', $order)->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+            return redirect()->route('admin.orders.show', $order)->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Lỗi cập nhật trạng thái: ' . $e->getMessage());
+        }
     }
 }

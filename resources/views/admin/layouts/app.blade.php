@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -139,83 +139,114 @@
         .card { 
             border: none; 
             border-radius: 16px; 
-            font-weight: 500;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
-        .btn-primary:hover { background-color: var(--primary-hover); }
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <div class="sidebar-brand">
-        <i class="bi bi-cpu-fill"></i> TechStore
-    </div>
-    
-    <div class="d-flex flex-column gap-1">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <i class="bi bi-cpu-fill"></i> TechStore
+        </div>
+        
         <a href="{{ route('admin.dashboard') }}" class="nav-link-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-            <i class="bi bi-speedometer2"></i> Dashboard
+            <i class="bi bi-speedometer2"></i> Bảng Điều Khiển
         </a>
-        
-        <div class="text-uppercase small fw-bold text-muted mt-3 mb-2 ps-3" style="font-size: 11px; letter-spacing: 1px;">Management</div>
-        
+
+        <div class="text-uppercase small fw-bold text-muted mt-3 mb-2 ps-3" style="font-size: 11px; letter-spacing: 1px;">Quản Lý</div>
+
         <a href="{{ route('admin.categories.index') }}" class="nav-link-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
-            <i class="bi bi-tags"></i> Categories
+            <i class="bi bi-grid"></i> Danh Mục
         </a>
         <a href="{{ route('admin.products.index') }}" class="nav-link-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
-            <i class="bi bi-box-seam"></i> Products
+            <i class="bi bi-box-seam"></i> Sản Phẩm
         </a>
         <a href="{{ route('admin.orders.index') }}" class="nav-link-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-            <i class="bi bi-cart-check"></i> Orders
+            <i class="bi bi-cart3"></i> Đơn Hàng
         </a>
-    </div>
 
-    <div class="mt-auto">
-        <a href="{{ route('home') }}" target="_blank" class="nav-link-item mb-2">
-            <i class="bi bi-box-arrow-up-right"></i> View Website
-        </a>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-link text-decoration-none w-100 text-start nav-link-item logout-btn border-0">
-                <i class="bi bi-box-arrow-right"></i> Logout
-            </button>
-        </form>
-    </div>
-</div>
-
-<div class="content">
-    <div class="top-navbar">
-        <h1 class="page-title">@yield('title')</h1>
-        
-        <div class="user-profile">
-            <div class="text-end me-2 d-none d-sm-block">
-                <div class="fw-bold text-dark" style="font-size: 14px;">{{ Auth::user()->name }}</div>
-                <div class="text-muted" style="font-size: 12px;">Administrator</div>
-            </div>
-            <div class="user-avatar">
-                {{ substr(Auth::user()->name, 0, 1) }}
-            </div>
+        <div class="mt-auto">
+            <a href="{{ route('home') }}" class="nav-link-item mb-2" target="_blank">
+                <i class="bi bi-box-arrow-up-right"></i> Xem Website
+            </a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="nav-link-item logout-btn w-100 border-0 text-start">
+                    <i class="bi bi-box-arrow-right"></i> Đăng Xuất
+                </button>
+            </form>
         </div>
     </div>
 
-    @yield('content')
-</div>
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Top Navbar -->
+        <div class="top-navbar">
+            <h4 class="page-title">@yield('title')</h4>
+            <div class="user-profile">
+                <div class="text-end d-none d-sm-block">
+                    <div class="fw-bold text-dark">{{ Auth::user()->name }}</div>
+                    <div class="small text-muted" style="font-size: 12px;">Quản Trị Viên</div>
+                </div>
+                <div class="user-avatar">
+                    {{ substr(Auth::user()->name, 0, 1) }}
+                </div>
+            </div>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        @yield('content')
+    </div>
 
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: '{{ session('success') }}',
-        timer: 3000,
-        showConfirmButton: false,
-        customClass: {
-            popup: 'rounded-4'
-        }
-    });
-</script>
-@endif
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false,
+            customClass: {
+                popup: 'rounded-4'
+            }
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: '{{ session('error') }}',
+            customClass: {
+                popup: 'rounded-4'
+            }
+        });
+    </script>
+    @endif
+
+    @if($errors->any())
+    <script>
+        let errorMsg = '<ul class="text-start">';
+        @foreach($errors->all() as $error)
+            errorMsg += '<li>{{ $error }}</li>';
+        @endforeach
+        errorMsg += '</ul>';
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Vui lòng kiểm tra lại dữ liệu!',
+            html: errorMsg,
+            customClass: {
+                popup: 'rounded-4'
+            }
+        });
+    </script>
+    @endif
 
 </body>
 </html>
