@@ -52,8 +52,7 @@
                                                         <i class="bi bi-dash"></i>
                                                     </button>
                                                     <input type="number" name="quantity" id="quantity-{{ $id }}" 
-                                                        class="form-control border-0 text-center fw-bold" 
-                                                        style="background-color: #fff !important; color: #000 !important; -moz-appearance: textfield;"
+                                                        class="form-control border-0 text-center quantity-input" 
                                                         value="{{ $details['quantity'] }}" min="1" readonly>
                                                     <button class="btn btn-light border-0 px-3 hover-bg-gray" type="button" 
                                                         @click="updateQuantity('{{ $id }}', 1)">
@@ -173,6 +172,12 @@
     input[type=number]::-webkit-outer-spin-button { 
         -webkit-appearance: none; 
         margin: 0; 
+    }
+    .quantity-input {
+        background-color: #fff !important;
+        color: #000 !important;
+        font-weight: 700 !important;
+        -moz-appearance: textfield;
     }
 </style>
 @endsection

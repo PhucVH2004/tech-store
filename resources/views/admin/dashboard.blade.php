@@ -3,11 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-@extends('admin.layouts.app')
-
-@section('title', 'Dashboard')
-
-@section('content')
 <div class="row">
     <div class="col-md-3">
         <div class="card bg-primary text-white h-100">
