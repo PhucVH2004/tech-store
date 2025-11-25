@@ -27,7 +27,7 @@
         <div class="col-lg-6">
             <div class="mb-4">
                 @if($product->brand)
-                    <span class="badge bg-accent bg-opacity-10 text-accent mb-2 px-3 py-2 rounded-pill fw-semibold">{{ $product->brand }}</span>
+                    <span class="badge bg-accent bg-opacity-10 text-white mb-2 px-3 py-2 rounded-pill fw-semibold">{{ $product->brand }}</span>
                 @endif
                 <h1 class="fw-bold display-5 mb-3">{{ $product->name }}</h1>
                 <div class="d-flex align-items-center gap-3 mb-4">
