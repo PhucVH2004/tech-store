@@ -24,14 +24,19 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Category::create([
+        $data = [
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'image' => $request->image,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
+
+        Category::create($data);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
@@ -45,14 +50,22 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name,' . $category->id,
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $category->update([
+        $data = [
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'image' => $request->image,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            if ($category->image && !Str::startsWith($category->image, ['http://', 'https://'])) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($category->image);
+            }
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
+
+        $category->update($data);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }

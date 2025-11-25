@@ -3,7 +3,7 @@
 <div class="col-md-3 mb-4">
     <div class="card h-100">
         <a href="{{ route('products.show', $product->slug) }}">
-            <img src="{{ $product->image }}" class="card-img-top p-3" alt="{{ $product->name }}" style="height: 200px; object-fit: contain;">
+            <img src="{{ \App\Helpers\ImageHelper::display($product->image) }}" class="card-img-top p-3" alt="{{ $product->name }}" style="height: 200px; object-fit: contain;">
         </a>
         <div class="card-body d-flex flex-column">
             <h5 class="card-title text-truncate" style="font-size: 1rem;">

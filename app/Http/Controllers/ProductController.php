@@ -13,20 +13,30 @@ class ProductController extends Controller
         $query = Product::query();
 
         if ($request->has('category')) {
-            $category = Category::where('slug', $request->category)->first();
-            if ($category) {
-                $query->where('category_id', $category->id);
-            }
+            $query->where('category_id', $request->category);
+        }
+
+        if ($request->has('brand')) {
+            $query->whereIn('brand', (array)$request->brand);
+        }
+
+        if ($request->has('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->has('max_price')) {
+            $query->where('price', '<=', $request->max_price);
         }
 
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $products = $query->latest()->paginate(12);
+        $products = $query->paginate(12);
         $categories = Category::all();
+        $brands = Product::select('brand')->distinct()->whereNotNull('brand')->pluck('brand');
 
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'brands'));
     }
 
     public function show($slug)

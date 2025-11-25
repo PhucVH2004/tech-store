@@ -28,7 +28,7 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ $item->product->image }}" alt="" width="50" class="me-2">
+                                        <img src="{{ \App\Helpers\ImageHelper::display($item->product->image) }}" alt="" width="50" class="me-2">
                                         {{ $item->product->name }}
                                     </div>
                                 </td>

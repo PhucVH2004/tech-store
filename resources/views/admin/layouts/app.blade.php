@@ -139,34 +139,6 @@
         .card { 
             border: none; 
             border-radius: 16px; 
-            background: #fff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); 
-            margin-bottom: 20px;
-        }
-        .card-header {
-            background-color: transparent;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 20px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .card-body { padding: 20px; }
-
-        /* Form Controls Modernization */
-        .form-control, .form-select {
-            border-radius: 10px;
-            padding: 10px 15px;
-            border: 1px solid #e2e8f0;
-        }
-        .form-control:focus {
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-            border-color: var(--primary-color);
-        }
-        .btn-primary {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
             font-weight: 500;
         }
         .btn-primary:hover { background-color: var(--primary-hover); }

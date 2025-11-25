@@ -27,7 +27,7 @@
                     <td>{{ $product->id }}</td>
                     <td>
                         @if($product->image)
-                            <img src="{{ $product->image }}" alt="{{ $product->name }}" width="50">
+                            <img src="{{ \App\Helpers\ImageHelper::display($product->image) }}" alt="{{ $product->name }}" width="50">
                         @else
                             No Image
                         @endif

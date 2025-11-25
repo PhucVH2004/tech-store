@@ -25,7 +25,7 @@
                     <td>{{ $category->id }}</td>
                     <td>
                         @if($category->image)
-                            <img src="{{ $category->image }}" alt="{{ $category->name }}" width="50">
+                            <img src="{{ \App\Helpers\ImageHelper::display($category->image) }}" alt="{{ $category->name }}" width="50">
                         @else
                             No Image
                         @endif

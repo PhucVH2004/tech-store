@@ -28,20 +28,31 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|unique:products,name',
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'stock' => 'required|integer|min:0',
+            'brand' => 'nullable|string',
+            'specifications' => 'nullable|array',
+            'is_featured' => 'boolean',
         ]);
 
-        Product::create([
+        $data = [
             'category_id' => $request->category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'price' => $request->price,
-            'image' => $request->image,
             'description' => $request->description,
             'stock' => $request->stock,
-        ]);
+            'brand' => $request->brand,
+            'specifications' => $request->specifications,
+            'is_featured' => $request->has('is_featured'),
+        ];
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        Product::create($data);
 
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
@@ -58,20 +69,34 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|unique:products,name,' . $product->id,
             'price' => 'required|numeric|min:0',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
             'stock' => 'required|integer|min:0',
+            'brand' => 'nullable|string',
+            'specifications' => 'nullable|array',
+            'is_featured' => 'boolean',
         ]);
 
-        $product->update([
+        $data = [
             'category_id' => $request->category_id,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'price' => $request->price,
-            'image' => $request->image,
             'description' => $request->description,
             'stock' => $request->stock,
-        ]);
+            'brand' => $request->brand,
+            'specifications' => $request->specifications,
+            'is_featured' => $request->has('is_featured'),
+        ];
+
+        if ($request->hasFile('image')) {
+            if ($product->image && !Str::startsWith($product->image, ['http://', 'https://'])) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($product->image);
+            }
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        $product->update($data);
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }

@@ -46,6 +46,7 @@ class CartController extends Controller
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated successfully');
         }
+        return redirect()->back()->with('success', 'Sản phẩm được cập nhật thành công');
     }
 
     public function remove($id)
