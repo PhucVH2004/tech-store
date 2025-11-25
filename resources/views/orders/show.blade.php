@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
-@section('title', 'Order Details')
+@section('title', 'Chi Tiết Đơn Hàng')
 
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Order #{{ $order->id }}</h2>
-        <a href="{{ route('orders.index') }}" class="btn btn-outline-secondary">Back to Orders</a>
+        <h2>Đơn Hàng #{{ $order->id }}</h2>
+        <a href="{{ route('orders.index') }}" class="btn btn-outline-secondary">Quay Lại Danh Sách</a>
     </div>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4">
-                <div class="card-header">Order Items</div>
+                <div class="card-header">Sản Phẩm Đặt Hàng</div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Qty</th>
-                                <th>Total</th>
+                                <th>Sản Phẩm</th>
+                                <th>Giá</th>
+                                <th>SL</th>
+                                <th>Tổng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="3" class="text-end">Total:</th>
+                                <th colspan="3" class="text-end">Tổng Cộng:</th>
                                 <th>{{ number_format($order->total_price) }} đ</th>
                             </tr>
                         </tfoot>
@@ -50,20 +50,20 @@
         </div>
         <div class="col-md-4">
             <div class="card mb-4">
-                <div class="card-header">Order Information</div>
+                <div class="card-header">Thông Tin Đơn Hàng</div>
                 <div class="card-body">
-                    <p><strong>Date:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
-                    <p><strong>Status:</strong> 
+                    <p><strong>Ngày Tạo:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>
+                    <p><strong>Trạng Thái:</strong> 
                         <span class="badge bg-{{ $order->status == 'pending' ? 'warning' : ($order->status == 'delivered' ? 'success' : ($order->status == 'cancelled' ? 'danger' : 'primary')) }}">
                             {{ ucfirst($order->status) }}
                         </span>
                     </p>
-                    <p><strong>Payment Method:</strong> {{ ucfirst($order->payment_method) }}</p>
+                    <p><strong>Phương Thức Thanh Toán:</strong> {{ ucfirst($order->payment_method) }}</p>
                     <hr>
-                    <h5>Shipping Details</h5>
-                    <p><strong>Name:</strong> {{ $order->shipping_name }}</p>
-                    <p><strong>Phone:</strong> {{ $order->shipping_phone }}</p>
-                    <p><strong>Address:</strong> {{ $order->shipping_address }}</p>
+                    <h5>Thông Tin Giao Hàng</h5>
+                    <p><strong>Họ Tên:</strong> {{ $order->shipping_name }}</p>
+                    <p><strong>Số Điện Thoại:</strong> {{ $order->shipping_phone }}</p>
+                    <p><strong>Địa Chỉ:</strong> {{ $order->shipping_address }}</p>
                 </div>
             </div>
         </div>

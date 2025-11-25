@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Shopping Cart')
+@section('title', 'Giỏ hàng')
 
 @section('content')
 <div class="container py-5" x-data="cart()">
     <div class="d-flex align-items-center justify-content-between mb-5">
-        <h1 class="fw-bold mb-0">Shopping Cart</h1>
-        <span class="badge bg-primary rounded-pill px-3 py-2">{{ count((array) session('cart')) }} Items</span>
+        <h1 class="fw-bold mb-0">Giỏ hàng</h1>
+        <span class="badge bg-primary rounded-pill px-3 py-2">{{ count((array) session('cart')) }} sản phẩm</span>
     </div>
 
     @if(session('cart'))
@@ -18,11 +18,11 @@
                         <table class="table table-hover align-middle mb-0">
                             <thead class="bg-light">
                                 <tr>
-                                    <th scope="col" class="py-3 ps-4 border-0 text-muted small text-uppercase fw-bold">Product</th>
-                                    <th scope="col" class="py-3 border-0 text-muted small text-uppercase fw-bold">Price</th>
-                                    <th scope="col" class="py-3 border-0 text-muted small text-uppercase fw-bold">Quantity</th>
-                                    <th scope="col" class="py-3 border-0 text-muted small text-uppercase fw-bold">Subtotal</th>
-                                    <th scope="col" class="py-3 pe-4 border-0 text-end text-muted small text-uppercase fw-bold">Action</th>
+                                    <th scope="col" class="py-3 ps-4 border-0 text-muted small text-uppercase fw-bold">Sản phẩm</th>
+                                    <th scope="col" class="py-3 border-0 text-muted small text-uppercase fw-bold">Giá</th>
+                                    <th scope="col" class="py-3 border-0 text-muted small text-uppercase fw-bold">Số lượng</th>
+                                    <th scope="col" class="py-3 border-0 text-muted small text-uppercase fw-bold">Tạm tính</th>
+                                    <th scope="col" class="py-3 pe-4 border-0 text-end text-muted small text-uppercase fw-bold">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +41,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="fw-medium">${{ number_format($details['price'], 2) }}</td>
+                                        <td class="fw-medium">{{ number_format($details['price']) }} đ</td>
                                         <td style="width: 150px;">
                                             <form action="{{ route('cart.update', $id) }}" method="POST" id="update-form-{{ $id }}">
                                                 @csrf
@@ -61,9 +61,9 @@
                                                 </div>
                                             </form>
                                         </td>
-                                        <td class="fw-bold text-accent">${{ number_format($details['price'] * $details['quantity'], 2) }}</td>
+                                        <td class="fw-bold text-accent">{{ number_format($details['price'] * $details['quantity']) }} đ</td>
                                         <td class="pe-4 text-end">
-                                            <a href="{{ route('cart.remove', $id) }}" class="btn btn-outline-danger btn-sm rounded-circle p-2 hover-scale" data-bs-toggle="tooltip" title="Remove Item">
+                                            <a href="{{ route('cart.remove', $id) }}" class="btn btn-outline-danger btn-sm rounded-circle p-2 hover-scale" data-bs-toggle="tooltip" title="Xóa sản phẩm">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>
@@ -76,7 +76,7 @@
                 
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <a href="{{ route('products.index') }}" class="text-decoration-none fw-semibold text-muted hover-text-primary">
-                        <i class="bi bi-arrow-left me-2"></i>Continue Shopping
+                        <i class="bi bi-arrow-left me-2"></i>Tiếp tục mua sắm
                     </a>
                 </div>
             </div>
@@ -85,26 +85,26 @@
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 bg-light sticky-top" style="top: 100px;">
                     <div class="card-body p-4">
-                        <h4 class="fw-bold mb-4">Order Summary</h4>
+                        <h4 class="fw-bold mb-4">Tóm tắt đơn hàng</h4>
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="text-muted">Subtotal</span>
-                            <span class="fw-bold">${{ number_format($total, 2) }}</span>
+                            <span class="text-muted">Tạm tính</span>
+                            <span class="fw-bold">{{ number_format($total) }} đ</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
-                            <span class="text-muted">Shipping</span>
-                            <span class="text-success fw-semibold">Free</span>
+                            <span class="text-muted">Vận chuyển</span>
+                            <span class="text-success fw-semibold">Miễn phí</span>
                         </div>
                         <hr class="my-4">
                         <div class="d-flex justify-content-between mb-4">
-                            <span class="fw-bold fs-5">Total</span>
-                            <span class="fw-bold fs-4 text-primary">${{ number_format($total, 2) }}</span>
+                            <span class="fw-bold fs-5">Tổng cộng</span>
+                            <span class="fw-bold fs-4 text-primary">{{ number_format($total) }} đ</span>
                         </div>
                         <a href="{{ route('checkout.index') }}" class="btn btn-primary w-100 btn-lg rounded-pill shadow-sm hover-translate">
-                            Proceed to Checkout <i class="bi bi-arrow-right ms-2"></i>
+                            Tiến hành thanh toán <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                         
                         <div class="mt-4 text-center">
-                            <small class="text-muted"><i class="bi bi-shield-lock me-1"></i> Secure Checkout</small>
+                            <small class="text-muted"><i class="bi bi-shield-lock me-1"></i> Thanh toán an toàn</small>
                         </div>
                     </div>
                 </div>
@@ -117,10 +117,10 @@
                     <i class="bi bi-cart-x text-muted" style="font-size: 3rem;"></i>
                 </div>
             </div>
-            <h2 class="fw-bold mb-3">Your cart is empty</h2>
-            <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
+            <h2 class="fw-bold mb-3">Giỏ hàng trống</h2>
+            <p class="text-muted mb-4">Có vẻ như bạn chưa thêm sản phẩm nào vào giỏ.</p>
             <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm hover-translate">
-                Start Shopping
+                Mua sắm ngay
             </a>
         </div>
     @endif

@@ -12,23 +12,23 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        if ($request->has('category')) {
+        if ($request->filled('category')) {
             $query->where('category_id', $request->category);
         }
 
-        if ($request->has('brand')) {
+        if ($request->filled('brand')) {
             $query->whereIn('brand', (array)$request->brand);
         }
 
-        if ($request->has('min_price')) {
+        if ($request->filled('min_price')) {
             $query->where('price', '>=', $request->min_price);
         }
 
-        if ($request->has('max_price')) {
+        if ($request->filled('max_price')) {
             $query->where('price', '<=', $request->max_price);
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 

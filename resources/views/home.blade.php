@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Trang Chủ')
 
 @section('content')
 <!-- Hero Section -->
@@ -8,12 +8,12 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <span class="badge bg-accent bg-opacity-10 text-white mb-3 px-3 py-2 rounded-pill fw-semibold">New Arrival</span>
-                <h1 class="display-3 fw-bold mb-4" style="letter-spacing: -1px;">Discover the Future of <span class="text-accent">Technology</span></h1>
-                <p class="lead text-muted mb-4">Experience the latest in innovation with our premium collection of smartphones, laptops, and accessories. Upgrade your lifestyle today.</p>
+                <span class="badge bg-accent bg-opacity-10 text-white mb-3 px-3 py-2 rounded-pill fw-semibold">Hàng Mới Về</span>
+                <h1 class="display-3 fw-bold mb-4" style="letter-spacing: -1px;">Khám Phá Tương Lai của <span class="text-accent">Công Nghệ</span></h1>
+                <p class="lead text-muted mb-4">Trải nghiệm sự đổi mới mới nhất với bộ sưu tập smartphone, laptop và phụ kiện cao cấp của chúng tôi. Nâng tầm phong cách sống ngay hôm nay.</p>
                 <div class="d-flex gap-3">
-                    <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg rounded-pill px-5">Shop Now</a>
-                    <a href="#featured" class="btn btn-outline-primary btn-lg rounded-pill px-5">Explore</a>
+                    <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg rounded-pill px-5">Mua Ngay</a>
+                    <a href="#featured" class="btn btn-outline-primary btn-lg rounded-pill px-5">Khám Phá</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -29,7 +29,7 @@
 <!-- Brands Section -->
 <section class="mb-5 py-4 bg-white border-top border-bottom">
     <div class="container">
-        <p class="text-center text-muted small fw-bold text-uppercase tracking-wide mb-4">Trusted by Top Brands</p>
+        <p class="text-center text-muted small fw-bold text-uppercase tracking-wide mb-4">Được Tin Dùng Bởi Các Thương Hiệu Hàng Đầu</p>
         <div class="d-flex justify-content-center flex-wrap gap-5 align-items-center opacity-50">
             <h4 class="m-0 fw-bold text-dark">Apple</h4>
             <h4 class="m-0 fw-bold text-dark">Samsung</h4>
@@ -46,10 +46,10 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
-                <h2 class="fw-bold mb-1">Featured Products</h2>
-                <p class="text-muted m-0">Handpicked selection just for you</p>
+                <h2 class="fw-bold mb-1">Sản Phẩm Nổi Bật</h2>
+                <p class="text-muted m-0">Lựa chọn tinh tế dành riêng cho bạn</p>
             </div>
-            <a href="{{ route('products.index') }}" class="text-decoration-none fw-semibold">View All <i class="bi bi-arrow-right"></i></a>
+            <a href="{{ route('products.index') }}" class="text-decoration-none fw-semibold">Xem Tất Cả <i class="bi bi-arrow-right"></i></a>
         </div>
         
         <div class="row g-4">
@@ -69,10 +69,10 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
             <div>
-                <h2 class="fw-bold mb-1">New Arrivals</h2>
-                <p class="text-muted m-0">The latest gadgets in our store</p>
+                <h2 class="fw-bold mb-1">Hàng Mới Về</h2>
+                <p class="text-muted m-0">Những thiết bị mới nhất tại cửa hàng</p>
             </div>
-            <a href="{{ route('products.index') }}" class="text-decoration-none fw-semibold">View All <i class="bi bi-arrow-right"></i></a>
+            <a href="{{ route('products.index') }}" class="text-decoration-none fw-semibold">Xem Tất Cả <i class="bi bi-arrow-right"></i></a>
         </div>
         
         <div class="row g-4">
@@ -81,23 +81,6 @@
                 @include('components.product-card', ['product' => $product])
             </div>
             @endforeach
-        </div>
-    </div>
-</section>
-
-<!-- Newsletter -->
-<section class="py-5 bg-primary text-white rounded-4 mx-3 mx-md-5 mb-5 position-relative overflow-hidden">
-    <div class="position-absolute top-0 end-0 bg-accent opacity-25 rounded-circle" style="width: 300px; height: 300px; transform: translate(30%, -30%);"></div>
-    <div class="container text-center position-relative">
-        <h2 class="fw-bold mb-3">Join Our Newsletter</h2>
-        <p class="mb-4 text-light opacity-75">Get the latest updates, exclusive offers, and tech news delivered to your inbox.</p>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form class="d-flex gap-2">
-                    <input type="email" class="form-control form-control-lg border-0" placeholder="Enter your email address">
-                    <button class="btn btn-accent btn-lg fw-semibold" style="background-color: var(--accent); color: white;">Subscribe</button>
-                </form>
-            </div>
         </div>
     </div>
 </section>

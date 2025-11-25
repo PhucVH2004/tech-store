@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'My Orders')
+@section('title', 'Đơn Hàng Của Tôi')
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">My Orders</h2>
+    <h2 class="mb-4">Đơn Hàng Của Tôi</h2>
     <div class="card">
         <div class="card-body">
             @if($orders->count() > 0)
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Order ID</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
+                        <th>Mã Đơn</th>
+                        <th>Ngày</th>
+                        <th>Trạng Thái</th>
+                        <th>Tổng</th>
+                        <th>Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@
                         </td>
                         <td>{{ number_format($order->total_price) }} đ</td>
                         <td>
-                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-sm btn-outline-primary">View Details</a>
+                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-sm btn-outline-primary">Xem Chi Tiết</a>
                         </td>
                     </tr>
                     @endforeach
@@ -39,8 +39,8 @@
             {{ $orders->links() }}
             @else
             <div class="text-center py-4">
-                <p>You have no orders yet.</p>
-                <a href="{{ route('products.index') }}" class="btn btn-primary">Start Shopping</a>
+                <p>Bạn chưa có đơn hàng nào.</p>
+                <a href="{{ route('products.index') }}" class="btn btn-primary">Mua Sắm Ngay</a>
             </div>
             @endif
         </div>

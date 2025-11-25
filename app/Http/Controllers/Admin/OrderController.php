@@ -28,6 +28,6 @@ class OrderController extends Controller
 
         $order->update(['status' => $request->status]);
 
-        return redirect()->route('admin.orders.show', $order)->with('success', 'Order status updated successfully.');
+        return redirect()->route('admin.orders.show', $order)->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
     }
 }

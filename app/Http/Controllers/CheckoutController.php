@@ -67,11 +67,11 @@ class CheckoutController extends Controller
             DB::commit();
             session()->forget('cart');
 
-            return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully!');
+            return redirect()->route('orders.show', $order->id)->with('success', 'Đặt hàng thành công!');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Order failed. Please try again. ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Đặt hàng thất bại. Vui lòng thử lại. ' . $e->getMessage());
         }
     }
 }

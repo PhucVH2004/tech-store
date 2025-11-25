@@ -35,7 +35,7 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', 'Thêm vào giỏ hàng thành công!');
     }
 
     public function update(Request $request, $id)
@@ -46,7 +46,7 @@ class CartController extends Controller
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated successfully');
         }
-        return redirect()->back()->with('success', 'Sản phẩm được cập nhật thành công');
+        return redirect()->back()->with('success', 'Sản phẩm đã được cập nhật thành công!');
     }
 
     public function remove($id)
@@ -56,6 +56,6 @@ class CartController extends Controller
             unset($cart[$id]);
             session()->put('cart', $cart);
         }
-        return redirect()->back()->with('success', 'Product removed successfully');
+        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng!');
     }
 }

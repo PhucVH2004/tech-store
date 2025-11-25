@@ -6,7 +6,7 @@
             <img src="{{ \App\Helpers\ImageHelper::display($product->image) }}" class="card-img-top p-4 transition-transform" alt="{{ $product->name }}" style="height: 220px; object-fit: contain;">
         </a>
         @if($product->is_featured)
-            <span class="position-absolute top-0 start-0 m-3 badge bg-danger rounded-pill">Featured</span>
+            <span class="position-absolute top-0 start-0 m-3 badge bg-danger rounded-pill">Nổi bật</span>
         @endif
     </div>
     <div class="card-body d-flex flex-column p-4">
@@ -17,10 +17,10 @@
             <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none text-dark fw-bold text-truncate-2" style="line-height: 1.4;">{{ $product->name }}</a>
         </h5>
         <div class="mt-auto pt-3 d-flex align-items-center justify-content-between">
-            <span class="text-accent fw-bold fs-5">${{ number_format($product->price, 2) }}</span>
+            <span class="text-accent fw-bold fs-5">{{ number_format($product->price, 0, ',', '.') }} đ</span>
             <form action="{{ route('cart.add', $product->id) }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-light rounded-circle p-2 text-primary hover-scale" data-bs-toggle="tooltip" title="Add to Cart">
+                <button type="submit" class="btn btn-light rounded-circle p-2 text-primary hover-scale" data-bs-toggle="tooltip" title="Thêm vào giỏ">
                     <i class="bi bi-cart-plus fs-5"></i>
                 </button>
             </form>
