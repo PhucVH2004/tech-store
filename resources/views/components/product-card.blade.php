@@ -17,7 +17,7 @@
             <a href="{{ route('products.show', $product->slug) }}" class="text-decoration-none text-dark fw-bold text-truncate-2" style="line-height: 1.4;">{{ $product->name }}</a>
         </h5>
         <div class="mt-auto pt-3 d-flex align-items-center justify-content-between">
-            <span class="text-accent fw-bold fs-5">{{ number_format($product->price, 0, ',', '.') }} đ</span>
+            <span class="text-danger fw-bold fs-5">{{ number_format($product->price, 0, ',', '.') }} đ</span>
             <form action="{{ route('cart.add', $product->id) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-light rounded-circle p-2 text-primary hover-scale" data-bs-toggle="tooltip" title="Thêm vào giỏ">
